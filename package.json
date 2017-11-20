@@ -1,21 +1,11 @@
 {
-  "name": "thechoice-api",
-  "version": "0.0.0",
+  "name": "api",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "MONGO_URL=mongodb://taco_mongo:27017/taco meteor --allow-superuser meteor --allow-superuser"
   },
   "dependencies": {
-    "body-parser": "~1.17.1",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.3",
-    "express": "^4.15.5",
-    "mongo": "^0.1.0",
-    "mongodb-migrations": "^0.8.5",
-    "mongoose": "^4.13.4",
-    "morgan": "~1.8.1",
-    "nodemon": "^1.12.1",
-    "pug": "^2.0.0-rc.4",
-    "serve-favicon": "~2.4.2"
+    "babel-runtime": "^6.26.0",
+    "meteor-node-stubs": "^0.3.2"
   }
 }
