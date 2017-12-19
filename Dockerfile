@@ -8,11 +8,9 @@ WORKDIR $APP_HOME
 
 COPY ./package.json .
 
-RUN npm install
+RUN npm install && npm install -g mocha
 
-RUN npm install -g mocha
-
-EXPOSE 8000
+EXPOSE 80
 
 COPY . .
 
