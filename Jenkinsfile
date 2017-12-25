@@ -10,8 +10,12 @@ pipeline {
     }
     stage('Tests') {
       steps {
-        sh '''sudo docker run -d --name api_test test_jenkins_docker'''
+        echo 'Creating container for tests'
+        sh '''sudo docker run -d -e PORT=80 --rm --name api_test test_jenkins_docker'''
+        echo 'Starting Testing step....'
         sh '''sudo docker exec api_test npm run test'''
+        echo 'Testing Step successfull, removing container'
+        sh '''sudo docker stop api_test'''
       }
     }
   }
