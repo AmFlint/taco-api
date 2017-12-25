@@ -2,12 +2,6 @@ pipeline {
   agent any
   stages {
     stage('Build') {
-      agent {
-        dockerfile {
-          filename 'Dockerfile'
-        }
-        
-      }
       steps {
         echo 'Building Dockerfile for taco-api'
         sh '''sudo docker build -t test_jenkins_docker .
