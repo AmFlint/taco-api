@@ -10,8 +10,8 @@ pipeline {
     }
     stage('Tests') {
       steps {
-        sh '''sudo docker run --name api_test test_jenkins_docker
-sudo docker exec api_test npm run test'''
+        sh '''sudo docker run -d --name api_test test_jenkins_docker'''
+        sh '''sudo docker exec api_test npm run test'''
       }
     }
   }
