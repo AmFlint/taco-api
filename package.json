@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "mocha --recursive tests",
+    "test": "mocha tests/*_test/*.js",
     "dev": "nodemon ./bin/www"
   },
   "dependencies": {
