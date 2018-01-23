@@ -6,6 +6,8 @@ RUN mkdir -p $APP_HOME
 
 WORKDIR $APP_HOME
 
+COPY ./package.json ./package.json
+
 RUN npm install
 
 RUN npm install -g mocha
