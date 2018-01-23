@@ -8,6 +8,8 @@ WORKDIR $APP_HOME
 
 RUN npm install
 
+RUN npm install -g mocha
+
 EXPOSE 80
 
 COPY . .
