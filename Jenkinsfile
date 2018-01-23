@@ -4,6 +4,7 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Building Dockerfile for taco-api'
+        sh 'npm install'
         sh 'docker build -t test_jenkins_docker .'
       }
     }
