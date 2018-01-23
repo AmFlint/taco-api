@@ -4,17 +4,17 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Building Dockerfile for taco-api'
-        sh '''sudo docker build -t test_jenkins_docker .'''
+        sh 'docker build -t test_jenkins_docker --no-cache .'
       }
     }
     stage('Tests') {
       steps {
         echo 'Creating container for tests'
-        sh '''sudo docker run -d --rm --name api_test test_jenkins_docker'''
+        sh 'docker run -d --rm --name api_test test_jenkins_docker'
         echo 'Starting Testing step....'
-        sh '''sudo docker exec api_test npm run test'''
+        sh 'docker exec api_test npm run test'
         echo 'Testing Step successfull, removing container'
-        sh '''sudo docker stop api_test'''
+        sh 'docker stop api_test'
       }
     }
   }
