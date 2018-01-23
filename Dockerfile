@@ -6,6 +6,8 @@ RUN mkdir -p $APP_HOME
 
 WORKDIR $APP_HOME
 
+RUN npm install
+
 EXPOSE 80
 
 COPY . .
