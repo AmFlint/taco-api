@@ -6,10 +6,6 @@ RUN mkdir -p $APP_HOME
 
 WORKDIR $APP_HOME
 
-COPY ./package.json .
-
-RUN npm install && npm install -g mocha
-
 EXPOSE 80
 
 COPY . .
