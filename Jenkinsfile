@@ -4,7 +4,7 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Building Dockerfile for taco-api'
-        sh 'docker build -t test_jenkins_docker .'
+        sh 'docker build -t test_jenkins_docker --no-cache .'
       }
     }
     stage('Tests') {
