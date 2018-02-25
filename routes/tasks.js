@@ -36,4 +36,18 @@ router.get('/:id', function(req, res, next) {
         .catch(err => res.status(404).send(err));
 });
 
+// Delete a task
+router.delete('/:id', function(req, res, next) {
+    Task.findOne({_id: req.params.id})
+        .then(task => {
+            if (!task) {
+                res.status(404).send({message: 'Task not found', status: 404});
+            }
+            task.remove()
+                .then(task => res.status(200).send(task))
+                .catch(err => res.status(500).send(err));
+        })
+        .catch(err => res.status(500).send(err));
+});
+
 module.exports = router;
