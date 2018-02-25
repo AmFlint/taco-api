@@ -2,7 +2,7 @@ const mongoose = require('mongoose'),
       Schema = mongoose.Schema,
       timestamps = require('mongoose-timestamps');
 
-const storySchema = new Schema({
+const taskSchema = new Schema({
     title: {
         type: String,
         minlength: [5, 'Title\'s length must be at least 4 characters.'],
@@ -17,8 +17,8 @@ const storySchema = new Schema({
         type: String,
         maxlength: [300, "Description's length must be less than 300 characters."]
     }
-}, {collection: 'stories'});
+}, {collection: 'tasks'});
 
-storySchema.plugin(timestamps);
+taskSchema.plugin(timestamps);
 
-module.exports = mongoose.model('Story', storySchema);
+module.exports = mongoose.model('Task', taskSchema);
