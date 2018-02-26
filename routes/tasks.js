@@ -10,7 +10,20 @@ router = function(server) {
         task.validate()
             .then(() => {
                 task.save()
-                    .then(task => res.send(200, task))
+                    .then(task => {
+                        // -- Format Response -- //
+                        const response = {
+                            boards: {
+                                [req.params.boardId]: {
+                                    tasks: [
+                                        task
+                                    ]
+                                }
+                            }
+                        };
+
+                        res.send(200, response);
+                    })
                     .catch(err => res.send(500, err));
             })
             .catch(err => res.send(400, err));
@@ -66,7 +79,21 @@ router = function(server) {
                     res.status(404).send({message: 'Task not found', status: 404});
                 }
                 task.remove()
-                    .then(task => res.status(200).send(task))
+                    .then(task => {
+
+                        // -- Format Response -- //
+                        const response = {
+                            boards: {
+                                [req.params.boardId]: {
+                                    tasks: [
+                                        task
+                                    ]
+                                }
+                            }
+                        };
+
+                        res.status(200).send(response);
+                    })
                     .catch(err => res.status(500).send(err));
             })
             .catch(err => res.status(500).send(err));

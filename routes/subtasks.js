@@ -43,7 +43,21 @@ router = function(server) {
                         task.subtasks.push({subtaskId: subtask._id});
                         task.save()
                             // Send response with subtask object
-                            .then(task => res.status(200).send(subtask))
+                            .then(task => {
+                                const response = {
+                                    boards: {
+                                        [req.params.boardId]: {
+                                            tasks: {
+                                                [taskId]: {
+                                                    subtasks: [subtask]
+                                                }
+                                            }
+                                        }
+                                    }
+                                };
+
+                                res.status(200).send(response);
+                            })
                             .catch(err => res.status(500).send(err))
                     })
                     .catch(err => res.status(500).send(err));
