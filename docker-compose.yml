@@ -1,0 +1,56 @@
+version: "3"
+
+services:
+  taco_api:
+    image: node:alpine
+    container_name: taco_api
+    expose:
+      - "80"
+    ports:
+      - "80:80"
+    volumes:
+      - .:/usr/taco/api
+    working_dir: /usr/taco/api
+    command: npm run dev
+    environment:
+      - DNS=localhost
+      - PORT=80
+    networks:
+      - taco_backend
+    deploy:
+      replicas: 1
+
+  taco_mongo:
+    image: mongo:3.2
+    container_name: taco_mongo
+    volumes:
+      - taco-mongo:/data/db
+    ports:
+      - "27017:27017"
+    networks: 
+      - taco_backend
+    deploy:
+      replicas: 1
+    
+
+  taco_db_interface:
+    image: mongo-express
+    container_name: taco_db_interface
+    ports:
+      - "8080:8081"
+    depends_on:
+      - taco_mongo
+    environment:
+      ME_CONFIG_MONGODB_AUTH_DATABASE: taco
+      ME_CONFIG_MONGODB_AUTH_USERNAME: admin
+      ME_CONFIG_MONGODB_AUTH_PASSWORD: pass
+      ME_CONFIG_MONGODB_SERVER: taco_mongo
+    networks: 
+      - taco_backend
+    deploy: 
+      replicas: 1
+
+networks:
+  taco_backend:
+volumes:
+  taco-mongo:
