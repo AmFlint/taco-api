@@ -7,11 +7,8 @@ const bodyParser = require('body-parser');
 
 // Routes
 const index = require('./routes/index');
-const users = require('./routes/users');
-const tasks = require('./routes/tasks');
 
 const app = express();
-const Task = require('./models/task');
 const connection = require('./config/db');
 
 // view engine setup
@@ -26,9 +23,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/boards/:boardId/tasks', tasks);
+// --------------------- ROUTING --------------------- //
+
+// ---- Subtasks Routes / Controller ---- //
+// /boards/:boardId/tasks/:taskId/subtasks
+require('./routes/subtasks')(app);
+
+// ---- Tasks Routes / Controller ---- //
+// /boards/:boardId/tasks/
+require('./routes/tasks')(app);
+
 app.use('/', index);
-app.use('/users', users);
+
+// --------------------- END ROUTING --------------------- //
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

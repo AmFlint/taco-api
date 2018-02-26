@@ -2,6 +2,14 @@ const mongoose = require('mongoose'),
       Schema = mongoose.Schema,
       timestamps = require('mongoose-timestamps');
 
+const subtask = new Schema({
+    subtaskId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Subtask',
+        index: true
+    }
+});
+
 const taskSchema = new Schema({
     title: {
         type: String,
@@ -15,8 +23,9 @@ const taskSchema = new Schema({
     },
     description: {
         type: String,
-        maxlength: [300, "Description's length must be less than 300 characters."]
-    }
+        maxlength: [500, "Description's length must be less than 500 characters."]
+    },
+    subtasks: [subtask]
 }, {collection: 'tasks'});
 
 taskSchema.plugin(timestamps);
