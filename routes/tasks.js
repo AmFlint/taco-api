@@ -19,20 +19,41 @@ router = function(server) {
 // List tasks
     server.get('/boards/:boardId/tasks/', function(req, res, next) {
         Task.find().exec()
-            .then(tasks => res.status(200).send(tasks))
+            .then(tasks => {
+                // -- Format response -- //
+                const response = {
+                    boards: {
+                        [req.params.boardId]: {
+                            tasks
+                        }
+                    }
+                };
+
+                res.status(200).send(response);
+            })
             .catch(err => res.status(500).send(err));
     });
 
 // Get single task
     server.get('/boards/:boardId/tasks/:id', function(req, res, next) {
-        console.log(req);
         Task.findOne({_id: req.params.id})
-            .then((task) => {
-                if (task) {
-                    res.status(200).send(task);
-                    res.end();
+            .then(task => {
+                if (!task) {
+                    res.status(404).send({message: 'No task found', status: 404});
+
                 }
-                res.status(404).send({message: 'No task found', status: 404});
+
+                // -- Format Response -- //
+                const response = {
+                    boards: {
+                        [req.params.boardId]: {
+                            tasks: [
+                                task
+                            ]
+                        }
+                    }
+                };
+                return res.status(200).send(response);
             })
             .catch(err => res.status(404).send(err));
     });
