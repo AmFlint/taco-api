@@ -5,7 +5,7 @@ const Subtask = require('../models/subtask'),
 
 router = function(server) {
 
-    // ---- Check for task's existence based on URL parameter 'taskId'
+    // ---- Check for task's existence based on URL parameter 'taskId' ---- //
     server.param('taskId', function(req, res, next) {
         Task.findOne({_id: req.params.taskId})
             .then(task => {

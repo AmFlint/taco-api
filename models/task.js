@@ -15,7 +15,7 @@ const taskSchema = new Schema({
         type: String,
         minlength: [5, 'Title\'s length must be at least 4 characters.'],
         maxlength: [100, 'Title\'s length may not exceed 100 characters.'],
-        required: [true, 'Title is required in order to create a Task']
+        required: [true, 'Title can not be blank']
     },
     points: {
         type: Number,
