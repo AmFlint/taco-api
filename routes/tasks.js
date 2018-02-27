@@ -22,6 +22,10 @@ router = function(server) {
     server.post('/boards/:boardId/tasks/', function(req, res, next) {
         const data = req.body;
         const task = new Task(data);
+
+        // -- Remove status from request body
+        data.status = undefined;
+
         task.validate()
             .then(() => {
                 task.save()

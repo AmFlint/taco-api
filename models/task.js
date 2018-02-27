@@ -25,6 +25,16 @@ const taskSchema = new Schema({
         type: String,
         maxlength: [500, "Description's length must be less than 500 characters."]
     },
+    status: {
+        type: String,
+        enum: [
+            'pending',
+            'in progress',
+            'done'
+        ],
+        default: 'pending',
+        required: [true, 'Task status can not be blank.']
+    },
     subtasks: [subtask]
 }, {collection: 'tasks'});
 

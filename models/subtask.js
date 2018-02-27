@@ -22,7 +22,8 @@ const subtaskSchema = new Schema({
           'in progress',
           'done'
         ],
-        default: 'in progress'
+        default: 'in progress',
+        required: [true, 'Subtask status can not be blank.']
     },
     description: {
         type: String,
