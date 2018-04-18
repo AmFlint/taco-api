@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 
 // Routes
 const index = require('./routes/index');
+const tasks = require('./routes/tasks');
+const lists = require('./routes/lists');
 
 const app = express();
 const connection = require('./config/db');
@@ -31,9 +33,11 @@ require('./routes/subtasks')(app);
 
 // ---- Tasks Routes / Controller ---- //
 // /boards/:boardId/tasks/
-require('./routes/tasks')(app);
+app.use('/boards/:boardId/tasks', tasks);
 
 app.use('/', index);
+
+app.use('/:id', lists);
 
 // --------------------- END ROUTING --------------------- //
 
