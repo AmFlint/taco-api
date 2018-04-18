@@ -9,7 +9,7 @@ describe("Chakram", function() {
 
 describe("Chakram", function() {
     it("should provide HTTP specific assertions", function () {
-        var response = chakram.get("http://localhost/test");
+        var response = chakram.get("http://localhost/health");
         return expect(response).to.have.status(200);
     });
 });
