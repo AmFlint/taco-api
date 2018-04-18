@@ -5,11 +5,6 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
-// Routes
-const index = require('./routes/index');
-const tasks = require('./routes/tasks');
-const lists = require('./routes/lists');
-
 const app = express();
 const connection = require('./config/db');
 
@@ -26,20 +21,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // --------------------- ROUTING --------------------- //
-
-// ---- Subtasks Routes / Controller ---- //
-// /boards/:boardId/tasks/:taskId/subtasks
-require('./routes/subtasks')(app);
-
-// ---- Tasks Routes / Controller ---- //
-// /boards/:boardId/tasks/
-app.use('/boards/:boardId/tasks', tasks);
-
-app.use('/', index);
-
-app.use('/:id', lists);
-
-// --------------------- END ROUTING --------------------- //
+require('./routes/index')(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
