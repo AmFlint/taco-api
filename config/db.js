@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const bluebird = require('bluebird');
 // Database informations - Host and Credentials
 const DB_HOST = process.env.DB_HOST || 'taco_mongo',
       DB_PORT = process.env.DB_PORT || 27017,
@@ -16,6 +16,7 @@ const options = {
     useMongoClient: true
 };
 
+mongoose.Promise = bluebird;
 mongoose.connect(`mongodb://${DB_CREDENTIALS}${DB_HOST_PORT}/${DB_NAME}`, options);
 
 module.exports = mongoose.connection;
